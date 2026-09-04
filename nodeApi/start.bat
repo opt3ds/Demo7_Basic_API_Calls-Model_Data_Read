@@ -1,29 +1,29 @@
 @echo off
 chcp 65001 >nul
-echo 正在启动 SQLite API 服务器...
+echo Starting SQLite API server...
 echo.
-echo 检查 Node.js 是否已安装...
+echo Checking if Node.js is installed...
 node --version
 if %errorlevel% neq 0 (
-  echo 错误: 未找到 Node.js，请先安装 Node.js
+  echo Error: Node.js not found. Please install Node.js first.
   pause
   exit /b 1
 )
 
 echo.
-echo 检查依赖是否已安装...
+echo Checking if dependencies are installed...
 if not exist node_modules (
-  echo 正在安装依赖...
+  echo Installing dependencies...
   npm install
   if %errorlevel% neq 0 (
-    echo 错误: 依赖安装失败
+    echo Error: Failed to install dependencies.
     pause
     exit /b 1
   )
 )
 
 echo.
-echo 启动服务器（默认端口 18084）...
+echo Starting server (default port 18084)...
 node server.js
 
 pause

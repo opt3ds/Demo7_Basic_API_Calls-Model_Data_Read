@@ -1,0 +1,546 @@
+/* ============================================================
+   Global styles — translated section by section from WebPage/src/style.less
+   Dark semi-transparent theme, visually blended with the 3D scene
+   ============================================================ */
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+button:hover {
+  border-color: #646cff;
+}
+
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* ---------- 3D main page and left toolbar (scoped translation from index.vue) ---------- */
+.opt-loader-demo {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+#container {
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 8px rgba(22, 119, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(64, 150, 255, 0.7);
+  }
+}
+
+.left-nav {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  background: rgba(50, 54, 65, 0.88);
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  overflow: hidden;
+}
+
+.left-tool {
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 60px;
+}
+
+.left-tool img {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 6px;
+  transition: all 0.3s ease;
+}
+
+.left-tool span {
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+}
+
+.left-tool:hover {
+  background: rgba(22, 119, 255, 0.5);
+  color: #fff;
+}
+
+.left-tool:hover img {
+  filter: drop-shadow(0 0 4px rgba(22, 119, 255, 0.5));
+}
+
+.left-tool.active {
+  background: rgba(22, 119, 255, 0.75);
+  color: #fff;
+  animation: glow-pulse 2.5s ease-in-out infinite;
+}
+
+.left-tool.active img {
+  filter: drop-shadow(0 0 6px rgba(22, 119, 255, 0.6));
+}
+
+/* ---------- Notification panel ---------- */
+.ant-notification-topRight {
+  top: 15vh !important;
+}
+
+/* The background/shadow of antd v5 React is on the notice-wrapper (ant-design-vue puts it on the notice);
+   the marginRight area would show a white bottom bar, so the wrapper needs to be transparent with no shadow */
+.ant-notification-notice-wrapper:has(> .engine-notification) {
+  background: transparent;
+  box-shadow: none;
+}
+
+.ant-notification {
+  width: auto !important;
+  margin: 0;
+}
+
+.engine-notification {
+  background-color: rgba(50, 54, 65, 0.88);
+  color: #fff;
+  margin-bottom: 0;
+  overflow: visible;
+  border-radius: 2px;
+  box-shadow:
+    0 6px 16px 0 rgba(0, 0, 0, 0.08),
+    0 3px 6px -4px rgba(0, 0, 0, 0.12),
+    0 9px 28px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* The scrolling areas inside the panel use a dark thin scrollbar, avoiding the default thick scrollbar ruining the look */
+.engine-notification ::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.engine-notification ::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(22, 119, 255, 0.5) 0%, rgba(22, 119, 255, 0.25) 100%);
+  border-radius: 2px;
+}
+
+.engine-notification ::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(22, 119, 255, 0.7) 0%, rgba(22, 119, 255, 0.4) 100%);
+}
+
+.engine-notification ::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+}
+
+/* Increase selector specificity to override the antd cssinjs default colors */
+.ant-notification .engine-notification .ant-notification-notice-message {
+  color: #fff;
+}
+
+.ant-notification .engine-notification .ant-notification-notice-close,
+.ant-notification .engine-notification .ant-notification-close {
+  color: #fff;
+}
+
+.engine-notification .ant-card {
+  background: transparent;
+}
+
+.engine-notification .ant-input,
+.engine-notification .ant-input-number,
+.engine-notification .ant-select,
+.engine-notification .ant-select-selector {
+  background: transparent;
+  color: #ffffff;
+  border-radius: 3px;
+  width: 100%;
+}
+
+.engine-notification .ant-input::placeholder,
+.engine-notification .ant-input-number::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.engine-notification .ant-radio-wrapper {
+  color: #ffffff;
+}
+
+.engine-notification .ant-radio-wrapper .ant-radio-inner {
+  background: transparent;
+}
+
+.engine-notification .ant-select-arrow {
+  color: #ffffff;
+}
+
+.engine-notification .ant-input-number-input {
+  color: #ffffff;
+}
+
+.engine-notification .ant-btn {
+  border-radius: 3px;
+}
+
+.engine-notification button:focus,
+.engine-notification button:focus-visible {
+  outline: none;
+}
+
+.engine-notification .ant-list {
+  margin-top: 15px;
+  border-radius: 3px;
+  color: #fff;
+}
+
+.engine-notification .ant-list .ant-list-item {
+  color: #fff;
+  padding: 8px 5px;
+}
+
+.engine-notification .ant-list .ant-list-item .ant-list-item-action > li {
+  color: #fff;
+}
+
+.engine-notification .ant-list .ant-list-item .ant-list-item-action {
+  margin-inline-start: auto;
+}
+
+.engine-notification .ant-list .ant-list-empty-text {
+  color: #fff;
+}
+
+.engine-notification .ant-tabs {
+  color: #ffffff;
+}
+
+.engine-notification .ant-tabs .ant-tabs-nav-wrap .ant-tabs-tab {
+  color: #fff;
+}
+
+.engine-notification .ant-form-item {
+  margin-bottom: 0;
+}
+
+.engine-notification .ant-form-item .ant-form-item-control-input-content {
+  display: flex;
+}
+
+.engine-notification .ant-form-item:not(:first-child) {
+  margin-top: 16px;
+}
+
+.engine-notification .ant-form-item-label {
+  line-height: 32px;
+}
+
+.engine-notification .ant-form-item-label label {
+  color: #fff;
+}
+
+.engine-notification .ant-form-item-control {
+  line-height: 32px;
+}
+
+.engine-notification .ant-table {
+  background: transparent;
+  color: #fff;
+}
+
+.engine-notification .ant-table .ant-table-thead > tr > th {
+  background: transparent;
+  color: #fff;
+  padding: 6px;
+}
+
+.engine-notification .ant-table .ant-table-tbody > tr > td {
+  padding: 6px;
+}
+
+.engine-notification .ant-table .ant-table-tbody > tr.ant-table-row:hover > td {
+  background-color: #fafafa38;
+}
+
+/* ---------- Settings modal (draggable Modal, rendered into body) ---------- */
+.set-data-wrap {
+  overflow: hidden;
+  z-index: 1020;
+}
+
+.set-data .ant-form-item {
+  margin-bottom: 0;
+}
+
+.set-data .ant-form-item-label label {
+  color: #fff;
+}
+
+.set-data .ant-input,
+.set-data .ant-input-number {
+  background: transparent;
+  color: #ffffff;
+  border-radius: 3px;
+  width: 100%;
+}
+
+.set-data .ant-input-number-input {
+  color: #ffffff;
+}
+
+.set-data .ant-modal-content {
+  background-color: rgba(50, 54, 65, 0.88);
+  color: #fff;
+  padding: 0;
+}
+
+.set-data .ant-modal-header {
+  background-color: transparent;
+  border-color: rgba(232, 232, 232, 0.5);
+  padding: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.set-data .ant-modal-header .ant-modal-title {
+  color: #ffffff;
+}
+
+.set-data .ant-modal-body {
+  padding: 15px 20px;
+}
+
+.set-data .ant-modal-footer {
+  border-color: rgba(232, 232, 232, 0.5);
+  border: none;
+  padding: 15px 20px;
+  padding-top: 0;
+}
+
+.set-data .ant-modal-footer .ant-btn {
+  height: 28px;
+  padding: 0 12px;
+}
+
+.set-data .ant-modal-footer .ant-btn:first-child {
+  background-color: transparent;
+  color: #fff;
+}
+
+.set-data .ant-modal-close {
+  color: #ffffff;
+  margin-top: 5px;
+}
+
+/* ---------- Scrollbar ---------- */
+.scroll-box {
+  overflow-y: auto;
+}
+
+.scroll-box::-webkit-scrollbar {
+  height: 5px;
+  width: 2px;
+}
+
+.scroll-box::-webkit-scrollbar-thumb {
+  border-radius: 1px;
+  box-shadow: inset 0 0 1px rgba(255, 255, 255, 0.2);
+  background: #ffffff;
+}
+
+.scroll-box::-webkit-scrollbar-track {
+  box-shadow: 0;
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.scroll-box .ant-tree-node-content-wrapper {
+  color: #ffffff;
+}
+
+/* ---------- Layout helpers ---------- */
+.operate-btn-box {
+  margin: 10px 20px 0;
+}
+
+.options-btn {
+  margin: 10px 0;
+}
+
+.tips-loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(50, 54, 65, 0.95);
+  color: #ffffff;
+  line-height: 40px;
+  padding: 0 20px;
+  border-radius: 5px;
+}
+
+.ant-notification-bottomRight .tips-notification {
+  background: rgba(50, 54, 65, 0.88);
+  color: #ffffff;
+  padding: 15px;
+  width: auto;
+  margin-right: 20px;
+}
+
+.ant-notification-bottomRight .tips-notification .ant-notification-notice-close {
+  display: none;
+}
+
+.ant-notification-bottomRight .tips-notification .ant-notification-notice-message {
+  color: #fff;
+  margin-bottom: 0;
+  padding-inline-end: 0 !important;
+}
+
+.custom-notification {
+  width: auto;
+  margin-right: 20px;
+}
+
+button:focus,
+button:focus-visible {
+  outline: none;
+}
+
+/* ============================================================
+   Panel-specific styles (scoped less translations of each panel)
+   ============================================================ */
+
+/* Feature properties panel */
+.attribute-panel .table-container {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.attribute-panel .table-container .ant-table-tbody > tr:hover > td {
+  background-color: rgba(22, 119, 255, 0.1);
+}
+
+.attribute-panel .empty-tip {
+  text-align: center;
+  padding: 20px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* Feature show/hide panel list */
+.list-box {
+  max-height: 50vh;
+}
+
+.list-box .ant-list-item {
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 4px;
+  margin: 0 4px;
+}
+
+.list-box .ant-list-item:hover {
+  background: rgba(22, 119, 255, 0.1);
+}
+
+.list-box .ant-list-item:last-child {
+  border-bottom: none;
+}
+
+.list-box::-webkit-scrollbar {
+  width: 4px;
+}
+
+.list-box::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(22, 119, 255, 0.5) 0%, rgba(22, 119, 255, 0.25) 100%);
+  border-radius: 2px;
+}
+
+.list-box::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(22, 119, 255, 0.7) 0%, rgba(22, 119, 255, 0.4) 100%);
+}
+
+.list-box::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+}
+
+/* Feature offset / feature rotation panels */
+.operate-box {
+  width: 100%;
+  margin: 5px 0;
+}
+
+.operate-box .ant-space-item:nth-child(1) {
+  width: 15%;
+  text-align: right;
+}
+
+.operate-box .ant-space-item:nth-child(2) {
+  width: 55%;
+}
+
+.operate-box .ant-space-item:nth-child(2) .ant-slider-rail {
+  background-color: rgba(252, 252, 252, 0.24);
+}
+
+.operate-box .ant-space-item:nth-child(3) {
+  width: 20%;
+}
